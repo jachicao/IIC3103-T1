@@ -1,7 +1,44 @@
+
+<style>
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+}
+</style>
 <p id="notice"><%= notice %></p>
 
 <h1>Articles</h1>
+<div class="mdl-grid">
+  <% @articles.order('created_at DESC').each do |article| %>
+    <div class="mdl-cell mdl-cell--4-col">
+      <div class="demo-card-square mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <h2 class="mdl-card__title-text"><%= article.title %></h2>
+          <br>
+          <h3 class="mdl-card__title-text"><%= article.subtitle %></h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <%= article.body %>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a 
+            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+            href=<%= article_path(article)%>
+            >
+            Detalle
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
+<!--
 <table>
   <thead>
     <tr>
@@ -14,20 +51,26 @@
   </thead>
 
   <tbody>
-    <% @articles.each do |article| %>
+    <% @articles.order('created_at DESC').each do |article| %>
       <tr>
         <td><%= article.title %></td>
         <td><%= article.subtitle %></td>
         <td><%= article.body %></td>
         <td><%= article.link %></td>
         <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @is_admin %>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<!-->
 <br>
+<% if @is_admin %>
+  <a href=<%= new_article_path %> class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+    <i class="material-icons">add</i>
+  </a>
+<% end %>
 
-<%= link_to 'New Article', new_article_path %>

@@ -20,5 +20,17 @@
   <%= @article.link %>
 </p>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
+
+<h2>Comments</h2>
+
+<% @article.comments.each do |comment| %>
+	<%= render comment %>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
+<% if @is_admin %>
+	<%= link_to 'Edit', edit_article_path(@article) %> |
+<% end %>
 <%= link_to 'Back', articles_path %>
