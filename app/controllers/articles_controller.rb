@@ -1,6 +1,15 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
+  def administrate
+    session[:is_admin] = true
+  end
+
+  def logout
+    session[:is_admin] = false
+    #redirect_to root_url
+  end
+
   # GET /articles
   # GET /articles.json
   def index
