@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :home do
+    collection do
+      get 'administrate'
+      get 'logout'
+    end
+  end
   root :to => "articles#index"
   resources :articles do
   	resources :comments do

@@ -20,9 +20,9 @@
           <!-- Navigation -->
           <nav class="mdl-navigation">
             <% if @is_admin %>
-            <a class="mdl-navigation__link" href="">Desconectar</a>
+            <%= link_to 'Desconectar', logout_home_index_path, :class => "mdl-navigation__link" %>
             <% else %>
-            <a class="mdl-navigation__link" href="">Administrar</a>
+            <%= link_to 'Administrar', administrate_home_index_path, :class => "mdl-navigation__link" %>
             <% end %>
           </nav>
         </div>
