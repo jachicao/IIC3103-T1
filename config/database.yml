@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: IIC3103-T1_production
-  username: IIC3103-T1
-  password: <%= ENV['IIC3103-T1_DATABASE_PASSWORD'] %>
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
