@@ -4,9 +4,9 @@
     <title>Noticias en vivo</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script async defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <%= csrf_meta_tags %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true, defer: true %>
   </head>
 
   <body onload="setInterval(function() { window.componentHandler.upgradeDom(); }, 250);">

@@ -10,8 +10,17 @@ class ApplicationController < ActionController::Base
     end
 
 	def set_cache_headers
-	  response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-	  response.headers["Pragma"] = "no-cache"
-	  response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+    response.headers["Surrogate-Control"] = "no-store"
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, proxy-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    if response.headers["X-Powered-By"]
+      response.headers.delete("X-Powered-By")
+    end
+    response.headers["X-DNS-Prefetch-Control"] = "off"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Download-Options"] = "noopen"
 	end
 end
