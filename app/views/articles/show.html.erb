@@ -1,36 +1,59 @@
-<p id="notice"><%= notice %></p>
+<style>
+  .demo-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+  }
+  .demo-content {
+    border-radius: 2px;
+    padding: 80px 56px;
+    margin-bottom: 80px;
+  }
+</style>
+<div class="demo-container mdl-grid">
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  <h3><%= @article.title %></h3>
+  <h5 class="demo-crumbs mdl-color-text--grey-500">
+    <%= @article.subtitle %>
+  </h5>
+  <br>
+  <% @article.body.split("\t").each do |str| %>
+    <p><%= str %></p>
+  <% end %>
+  <% if @article.comments.length > 0 %>
+    <h4>Comentarios</h4>
+    <ul class="mdl-list">
+      <% @article.comments.each do |comment| %>
+        <li class="mdl-list__item mdl-list__item--three-line">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span><%= comment.commenter %></span>
+            <span class="mdl-list__item-text-body">
+              <%= comment.body %>
+            </span>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <h4>Nuevo comentario</h4>
+  <%= render 'comments/form' %>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Subtitle:</strong>
-  <%= @article.subtitle %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @article.body %>
-</p>
-
-<p>
-  <strong>Link:</strong>
-  <%= @article.link %>
-</p>
-
-
-<h2>Comments</h2>
-
-<% @article.comments.each do |comment| %>
-	<%= render comment %>
-<% end %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<a href=<%= articles_path %> title="Volver">
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">arrow_backward</i>
+  </button>
+</a>
 
 <% if @is_admin %>
-	<%= link_to 'Edit', edit_article_path(@article) %> |
+  <a href=<%= article_path(@article) %> title="Editar">
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+      <i class="material-icons" role="presentation">edit</i>
+    </button>
+  </a>
+
 <% end %>
-<%= link_to 'Back', articles_path %>
+
+<p id="notice"><%= notice %></p>

@@ -1,6 +1,19 @@
-<h1>Editing Article</h1>
-
+<style>
+.demo-blog .demo-blog__posts > .demo-nav > .demo-nav__button:first-child .mdl-button {
+  margin-right: 16px;
+}
+.demo-blog .demo-blog__posts > .demo-nav > .demo-nav__button:last-child .mdl-button {
+  margin-left: 16px;
+}
+</style>
 <%= render 'form', article: @article %>
-
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<a href=<%= articles_path %> title="Volver">
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">arrow_backward</i>
+  </button>
+</a>
+<a href=<%= article_path(@article) %> title="Mostrar">
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">launch</i>
+  </button>
+</a>

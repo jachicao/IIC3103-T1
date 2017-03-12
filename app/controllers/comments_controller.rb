@@ -7,15 +7,27 @@ class CommentsController < ApplicationController
     @comments = @article.comments;
   end
 
-
   # GET /articles/:article_id/comments/:id
   def show
   end
 
+  # GET /articles/:article_id/comments/
+  def new
+    @article = @article.comments
+  end
+
   # POST /articles/:article_id/comments/
   def create
-    @comment = @article.comments.create(comment_params)
-    redirect_to article_path(@article)
+    @comment = @article.comments.new(comment_params)
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to article_path(@article), notice: '' }
+        format.json { render :show, status: :created, location: @article }
+      else
+        format.html { redirect_to article_path(@article) }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

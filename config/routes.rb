@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :home do
+  resources :administrator do
     collection do
-      get 'administrate'
+      get 'login'
       get 'logout'
     end
   end

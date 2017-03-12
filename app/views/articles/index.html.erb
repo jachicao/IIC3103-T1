@@ -1,60 +1,83 @@
-
 <style>
-.demo-card > .mdl-card__title {
-  color: #fff;
-  background:
-    bottom right 15% no-repeat #46B6AC;
-}
-.demo-card > .mdl-card__menu {
-  color: #fff;
-}
-.demo-card > .mdl-card__title > h3 {
-  margin: 0;
-}
-.demo-card > .mdl-card__title > h6 {
-  margin: 0;
-}
-</style>
-<p id="notice"><%= notice %></p>
+  .demo-card > .mdl-card__title {
+    color: #fff;
+    background:
+      bottom right 15% no-repeat #00bbbb;
+  }
+  .demo-card > .mdl-card__menu {
+    color: #fff;
+  }
+  .demo-card > .mdl-card__title > h3 {
+    margin: 0;
+  }
+  .demo-card > .mdl-card__title > h6 {
+    margin: 0;
+  }
+  #view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+  }
+  .portfolio-max-width {
+    max-width: 900px;
+    margin: auto;
+  }
 
-<h1>Articles</h1>
-<div class="mdl-grid">
+  .portfolio-card .mdl-card__title {
+    padding-bottom: 0;
+  }
+
+  .no-bottom-padding {
+    padding-bottom: 0;
+  }
+
+  .portfolio-btn {
+  position: relative;
+  float: right;
+  top: -4px;
+}
+
+</style>
+<% if @is_admin %>
+  <a href=<%= new_article_path %> id="view-source" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"><i class="material-icons">add</i></a>
+<% end %>
+<p id="notice"><%= notice %></p>
+<div class="mdl-grid portfolio-max-width">
   <% @articles.order('created_at DESC').each do |article| %>
-    <div class="mdl-cell mdl-cell--4-col">
-      <div class="demo-card mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-          <h3><%= article.title[0, 250] %></h3>
-        </div>
-        <div class="mdl-card__title mdl-card--expand">
-          <h6><%= article.subtitle[0, 250] %></h6>
-        </div>
-        <div class="mdl-card__supporting-text">
+    <div class="mdl-cell mdl-cell--4-col demo-card mdl-card mdl-shadow--4dp">
+      <div class="mdl-card__title mdl-card--expand">
+        <h3><%= article.title[0, 250] %></h3>
+      </div>
+      <div class="mdl-card__media">
+      </div>
+      <div class="mdl-card__title mdl-card--expand">
+        <span> <%= article.subtitle[0, 250] %> </span>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <p>
           <% body = article.body %>
           <% if body.length >= 1000 %>
             <%= body[0, 997] << '...' %>
           <% else %>
             <%= body %>
           <% end %>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <%= link_to 'Detalle', article, :class=> "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
-          <% if @is_admin %>
-            <%= link_to 'Editar', edit_article_path(article), :class=> "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
-            <%= link_to 'Borrar', article, method: :delete, data: { confirm: '¿Estás segur@?' }, :class=> "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
-          <% end %>
-        </div>
-        <div class="mdl-card__menu">
-          <div class="material-icons mdl-badge mdl-badge--overlap" data-badge=<%= article.comments.size %>>comment</div>
-        </div>
+        </p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <%= link_to 'Ver', article, :class=> "mdl-button mdl-button--colored mdl-js-button  mdl-js-ripple-effect" %>
+        <% if @is_admin %>
+          <%= link_to 'Editar', edit_article_path(article), :class=> "mdl-button mdl-button--colored  mdl-js-button mdl-js-ripple-effect" %>
+          <%= link_to 'Borrar', article, method: :delete, data: { confirm: '¿Estás segur@?' }, :class => "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+        <% end %>
+      </div>
+      <div class="mdl-card__menu">
+        <div class="material-icons mdl-badge mdl-badge--overlap" data-badge=<%= article.comments.size %>>comment</div>
       </div>
     </div>
   <% end %>
 </div>
-<br>
-
-<% if @is_admin %>
-  <a href=<%= new_article_path %> class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-    <i class="material-icons">add</i>
-  </a>
-<% end %>
 

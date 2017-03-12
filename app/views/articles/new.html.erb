@@ -1,5 +1,7 @@
-<h1>New Article</h1>
-
 <%= render 'form', article: @article %>
 
-<%= link_to 'Back', articles_path %>
+<a href=<%= articles_path %> title="Volver">
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">arrow_backward</i>
+  </button>
+</a>

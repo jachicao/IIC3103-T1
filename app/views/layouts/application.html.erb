@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body onload="setInterval(function() { window.componentHandler.upgradeDom(); }, 250);">
     <div class="mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
@@ -20,9 +20,11 @@
           <!-- Navigation -->
           <nav class="mdl-navigation">
             <% if @is_admin %>
-            <%= link_to 'Desconectar', logout_home_index_path, :class => "mdl-navigation__link" %>
+              <%= link_to 'Inicio', root_path, :class => "mdl-navigation__link" %>
+              <%= link_to 'Modo Administrador', administrator_index_path, :class => "mdl-navigation__link"%>
+              <%= link_to 'Desconectar', logout_administrator_index_path, :class => "mdl-navigation__link"%>
             <% else %>
-            <%= link_to 'Administrar', administrate_home_index_path, :class => "mdl-navigation__link" %>
+              <%= link_to 'Administrar', login_administrator_index_path, :class => "mdl-navigation__link"%>
             <% end %>
           </nav>
         </div>

@@ -17,9 +17,7 @@ class ArticlesController < ApplicationController
     if @is_admin
       @article = Article.new
     else
-      respond_to do |format|
-        format.html { redirect_to '' }
-      end
+      redirect_to root_url
     end
   end
 
@@ -27,9 +25,7 @@ class ArticlesController < ApplicationController
   def edit
     if @is_admin
     else
-      respond_to do |format|
-        format.html { redirect_to '' }
-      end
+      redirect_to root_url
     end
   end
 
@@ -41,7 +37,7 @@ class ArticlesController < ApplicationController
   
       respond_to do |format|
         if @article.save
-          format.html { redirect_to @article, notice: 'Article was successfully created.' }
+          format.html { redirect_to @article, notice: '' }
           format.json { render :show, status: :created, location: @article }
         else
           format.html { render :new }
@@ -49,9 +45,7 @@ class ArticlesController < ApplicationController
         end
       end
     else
-      respond_to do |format|
-        format.html { redirect_to '' }
-      end
+      redirect_to root_url
     end
   end
 
@@ -61,7 +55,7 @@ class ArticlesController < ApplicationController
     if @is_admin
       respond_to do |format|
         if @article.update(article_params)
-          format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+          format.html { redirect_to @article, notice: '' }
           format.json { render :show, status: :ok, location: @article }
         else
           format.html { render :edit }
@@ -69,9 +63,7 @@ class ArticlesController < ApplicationController
         end
       end
     else
-      respond_to do |format|
-        format.html { redirect_to '' }
-      end
+      redirect_to root_url
     end
   end
 
@@ -81,13 +73,11 @@ class ArticlesController < ApplicationController
     if @is_admin
       @article.destroy
       respond_to do |format|
-        format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+        format.html { redirect_to :back, notice: '' }
         format.json { head :no_content }
       end
     else
-      respond_to do |format|
-        format.html { redirect_to '' }
-      end
+      redirect_to root_url
     end
   end
 
@@ -99,6 +89,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :subtitle, :body, :link)
+      params.require(:article).permit(:title, :subtitle, :body)
     end
 end

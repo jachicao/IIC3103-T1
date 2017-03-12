@@ -1,13 +1,14 @@
 <%= form_for([@article, @article.comments.build]) do |f| %>
+  <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" name="comment[commenter]" type="text" id="comment_commenter">
+    <label class="mdl-textfield__label" for="comment_commenter">Nombre</label>
+  </div>
+  <br>
+  <div class="mdl-textfield mdl-js-textfield">
+    <textarea class="mdl-textfield__input" type="text" name="comment[body]" rows= "3" id="comment_body" ></textarea>
+    <label class="mdl-textfield__label" for="comment_body">Escribe aquí</label>
+  </div>
   <p>
-    <%= f.label :commenter %><br>
-    <%= f.text_field :commenter %>
-  </p>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
+    <%= f.submit "Submit", :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
   </p>
 <% end %>

@@ -1,37 +1,51 @@
-<%= form_for(article) do |f| %>
-  <% if article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+<style>
+  .demo-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+  }
+  .demo-content {
+    border-radius: 2px;
+    padding: 80px 56px;
+    margin-bottom: 80px;
+  }
+</style>
 
-      <ul>
-      <% article.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="demo-container mdl-grid">
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  <%= form_for(article) do |f| %>
+    <% if article.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(article.errors.count, "error") %> prohibited this article from being  saved:</h3>
+
+        <ul>
+        <% article.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field mdl-textfield mdl-js-textfield">
+      <input <% if article.title? %> value=<%=article.title%> <% end %> class=" mdl-textfield__input" name="article[title]" type="text" id="article_title">
+      <label class="mdl-textfield__label" for="article_title">Titulo</label>
+    </div>
+    <br>
+  
+    <div class="field mdl-textfield mdl-js-textfield">
+      <input  <% if article.subtitle? %> value=<%=article.subtitle%> <% end %> class="  mdl-textfield__input" name="article[subtitle]" type="text" id="article_subtitle">
+      <label class="mdl-textfield__label" for="article_subtitle">Bajada</label>
+    </div>
+    <br>
+  
+    <div class="field mdl-textfield mdl-js-textfield">
+      <textarea class="mdl-textfield__input" type="text" name="article[body]" rows= "3" id="  article_body" ><% if article.body? %><%=article.body%><% end %></textarea>
+      <label class="mdl-textfield__label" for="article_body">Cuerpo</label>
+    </div>
+    <br>
+  
+    <div class="actions">
+      <%= f.submit "Submit", :class => "mdl-button mdl-js-button mdl-button--raised   mdl-button--colored" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :subtitle %>
-    <%= f.text_field :subtitle %>
-  </div>
-
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-
-  <div class="field">
-    <%= f.label :link %>
-    <%= f.text_field :link %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

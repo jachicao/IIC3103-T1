@@ -1,0 +1,59 @@
+<style>
+.demo-card > .mdl-card__title {
+  color: #fff;
+  background:
+    bottom right 15% no-repeat #46B6AC;
+}
+.demo-card > .mdl-card__menu {
+  color: #fff;
+}
+.demo-card > .mdl-card__title > h3 {
+  margin: 0;
+}
+.demo-card > .mdl-card__title > h6 {
+  margin: 0;
+}
+#view-source {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  z-index: 900;
+}
+</style>
+<p id="notice"><%= notice %></p>
+  <table class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Titulo</th>
+        <th class="mdl-data-table__cell--non-numeric mdl-data-table__header--sorted-descending">Fecha</th>
+        <th class="mdl-data-table__cell--non-numeric">
+            <%= link_to 'Nuevo', new_article_path, :class=> "mdl-button mdl-button--colored  mdl-js-button mdl-js-ripple-effect" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.order('created_at DESC').each do |article| %>
+        <tr>
+          <td class="mdl-data-table__cell--non-numeric">
+            <% title = article.title %>
+            <% if title.length >= 100 %>
+            <%= title[0, 97] << '...' %>
+            <% else %>
+            <%= title %>
+            <% end %>
+            </td>
+          <td class="mdl-data-table__cell--non-numeric"><%= article.created_at.to_time.strftime('%B %e at %l:%M %p') %> </td>
+          <td>
+            <%= link_to 'Editar', edit_article_path(article), :class=> "mdl-button mdl-button--colored  mdl-js-button mdl-js-ripple-effect" %>
+          </td>
+          <td>
+              <%= link_to 'Borrar', article, method: :delete, data: { confirm: '¿Estás segur@?' }, :class => "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<a href=<%= new_article_path %> id="view-source" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"><i class="material-icons">add</i></a>
