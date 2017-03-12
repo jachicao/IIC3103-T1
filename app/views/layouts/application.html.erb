@@ -12,7 +12,7 @@
   <body onload="setInterval(function() { window.componentHandler.upgradeDom(); }, 250);">
     <div class="mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--scroll">
-        <div class="mdl-layout__header-row">
+        <div class="mdl-layout__header-row mdl-layout--large-screen-only">
           <!-- Title -->
           <span class="mdl-layout-title">Noticias en vivo</span>
           <!-- Add spacer, to align navigation to the right -->
@@ -29,6 +29,18 @@
           </nav>
         </div>
       </header>
+      <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+        <span class="mdl-layout-title">Noticias en vivo</span>
+        <nav class="mdl-navigation">
+          <% if @is_admin %>
+            <%= link_to 'Inicio', root_path, :class => "mdl-navigation__link" %>
+            <%= link_to 'Modo Administrador', administrator_index_path, :class => "mdl-navigation__link"%>
+            <%= link_to 'Desconectar', logout_administrator_index_path, :class => "mdl-navigation__link"%>
+          <% else %>
+            <%= link_to 'Administrar', login_administrator_index_path, :class => "mdl-navigation__link"%>
+          <% end %>
+        </nav>
+      </div>
       <main class="mdl-layout__content">
         <div class="page-content">
           <%= yield %>
