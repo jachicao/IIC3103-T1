@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     @comment = @article.comments.new(comment_params)
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to article_path(@article), notice: '' }
+        format.html { redirect_to :back, notice: '' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { redirect_to article_path(@article) }
