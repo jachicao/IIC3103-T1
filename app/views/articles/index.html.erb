@@ -50,7 +50,7 @@
   <% @articles.order('created_at DESC').each do |article| %>
     <div class="mdl-cell mdl-cell--6-col demo-card mdl-card mdl-shadow--4dp">
       <div class="mdl-card__title mdl-card--expand">
-        <h3><%= article.title[0, 250] %></h3>
+        <h3><%= article.title %></h3>
       </div>
       <div class="mdl-card__media">
       </div>
